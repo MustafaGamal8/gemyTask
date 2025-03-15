@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Hero {
+  id    String @id @default(uuid())
+  image String
+}
+
+model Feature {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  image       String
+  createdAt   DateTime @default(now())
+}
+
+model Service {
+  id          String   @id @default(uuid())
+  image       String
+  title       String
+  description String
+  options     Json
+  createdAt   DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(uuid())
+  author    String
+  content   String
+  rating    Int      @default(5)
+  createdAt DateTime @default(now())
+}
+
+model PricingPlan {
+  id        String   @id @default(uuid())
+  name      String
+  price     Float
+  features  String[]
+  createdAt DateTime @default(now())
+}
+
+model BlogPost {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  image     String?
+  createdAt DateTime @default(now())
+  tags      String[]
+}
+
+model Subscription {
+  id    String @id @default(uuid())
+  email String @unique
+}
